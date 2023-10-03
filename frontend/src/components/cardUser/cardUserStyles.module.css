@@ -1,0 +1,31 @@
+.dates{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.containerHeader{
+    display: flex;
+    flex-direction: row;
+}
+
+.accordionBtn{
+    width: auto;
+}
+.accordionDiv{
+    width: 80rem;
+}
+.tableC{
+    margin-bottom: 0rem;
+}
+.item{
+    width: 5%;
+}
