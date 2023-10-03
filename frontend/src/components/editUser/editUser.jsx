@@ -21,25 +21,41 @@ const EditUser = () => {
             </div>
             <div className={styles.containerForm}>
 
-                <form>
+            <form>
                     <fieldset className={styles.Form}>
-                        <label htmlFor="Name">Project Name</label>
+                        <label htmlFor="First name">First name</label>
                         <input type="text" />
 
-                        <label htmlFor="Description">Description</label>
-                        <textarea></textarea>
+                        <label htmlFor="Last name">Last name</label>
+                        <input type="text" />
+                        <label htmlFor="Document type">Document type</label>
+                        <select>
+                            <option value="DNI">DNI</option>
+                            <option value={'LC'} >Libreta civica</option>
+                        </select>
+                        <label htmlFor="Document number">Document number</label>
+                        <input type="text" />
+                        <label htmlFor="User state">User state</label>
+                        <select>
+                            <option value="Active">Active</option>
+                            <option value={'Inactive'} >Inactive</option>
+                        </select>
 
-                        <label htmlFor="Project Manager">Project Manager</label>
-                        <select name="manager" id=""></select>
+                        <label htmlFor="Address">Address</label>
+                        <input type="text" />
+                        <label htmlFor="City">City</label>
+                        <input type="text" />
+                        <label htmlFor="Postal code">Postal code</label>
+                        <input type="text" />
+                        <label htmlFor="Phone numbers">Phone numbers</label>
+                        <input type="text" />
+                        <label htmlFor="Email">Email</label>
+                        <input type="text" />
+                        <label htmlFor="Date of birth">Date of birth</label>
+                        <input type="date" value="2023-10-03" min="1960-01-01" max="2025-12-31" />
 
-                        <label htmlFor="Assigned to">Assigned to</label>
-                        <select name="Assigned to" id=""></select>
 
-                        
-                        <label htmlFor="Status">Status</label>
-                        <select name="status" id=""></select>
-
-                        <button>Save Changes</button>
+                        <button>Create User</button>
                     </fieldset>
                 </form>
             </div>
