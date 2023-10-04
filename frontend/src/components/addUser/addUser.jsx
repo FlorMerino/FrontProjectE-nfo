@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './../addUser/addUserStyles.module.css';
 import styles2 from './../home/homeStyles.module.css';
 import userImage from '../../usersImage.png';
@@ -6,17 +7,23 @@ import { BiArrowBack } from 'react-icons/bi';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postCreateUser } from '../../redux/slice/userAction';
+import { allDocuments } from '../../redux/slice/documentAction';
+import { allStatus } from '../../redux/slice/userStatusAction';
 
 
 const AddUser = () => {
 
     const dispatch = useDispatch()
-
+    React.useEffect(() => {
+        dispatch(allDocuments())
+        dispatch(allStatus())
+        
+    }, [])
     const documents = useSelector(state => state.document.allDocuments)
     const userStatus = useSelector(state => state.userStatus.allUserStatus)
 
     const [input, setInput] = useState({
-       
+
         userLogin: "logeado",
         firstName: "",
         lastName: "",
@@ -27,7 +34,7 @@ const AddUser = () => {
         postalCode: "",
         phoneNumbers: "",
         email: "",
-        UserStatusId:null ,
+        UserStatusId: null,
         dateOfBirth: null,
         twoFactorEnabled: false,
         mustChangePassword: false,
@@ -47,13 +54,13 @@ const AddUser = () => {
         if (!input.firstName || !input.userLogin) {
             e.preventDefault()
             alert('fields are missing')
-            
+
         }
         if (input.DocumentTypeId && !input.documentNumber) {
             e.preventDefault()
             alert('Please enter your document number')
-            
-        }else if(!input.DocumentTypeId && input.documentNumber){
+
+        } else if (!input.DocumentTypeId && input.documentNumber) {
             e.preventDefault()
             alert('Please enter your document type')
         }
@@ -72,7 +79,7 @@ const AddUser = () => {
                 postalCode: "",
                 phoneNumbers: "",
                 email: "",
-                UserStatusId:null ,
+                UserStatusId: null,
                 dateOfBirth: null,
                 twoFactorEnabled: false,
                 mustChangePassword: false,
@@ -97,90 +104,121 @@ const AddUser = () => {
                 <form onSubmit={(e) => handleSubmit(e)} >
                     <fieldset className={styles.Form}>
                         <label htmlFor="First name">First name</label>
-                        <input 
-                        type="text"
-                        value={input.firstName}
-                        name="firstName"
-                        onChange={(e) => handleChange(e)} 
+                        <input
+                            type="text"
+                            value={input.firstName}
+                            name="firstName"
+                            onChange={(e) => handleChange(e)}
                         />
 
                         <label htmlFor="Last name">Last name</label>
-                        <input 
-                        type="text" 
-                        value={input.lastName}
-                        name="lastName"
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="text"
+                            value={input.lastName}
+                            name="lastName"
+                            onChange={(e) => handleChange(e)}
                         />
 
                         <label htmlFor="Document type">Document type</label>
-                        <select name="DocumentTypeId" onChange={e => handleChange(e)} value={input.DocumentTypeId}>
-                            <option value="none" >-</option>
-                            <option value={1}>DNI</option>
-                            <option value={2}>Libreta civica</option>
-                        </select>
+                        {
+                            documents.length !== 0 ?
+                                <select name="DocumentTypeId" onChange={e => handleChange(e)} value={input.DocumentTypeId}>
+                                    <option value="none" >-</option>
+                                    { 
+                                    documents.map((doc)=>{
+                                       return <option value={doc.Id}>{doc.name}</option>
+                                    })
+                                    }
+                                </select>
+                                :
+                                <div>
+                                    <select name="DocumentTypeId" onChange={e => handleChange(e)} value={input.DocumentTypeId}>
+                                        <option value="none" >-</option>
+                                    </select>
+                                    <p>
+                                        Please make sure to enter some type of document, in the Add document type section</p>
+                                </div>
+                        }
 
                         <label htmlFor="Document number">Document number</label>
-                        <input 
-                        type="text" 
-                        value={input.documentNumber}
-                        name="documentNumber"
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="text"
+                            value={input.documentNumber}
+                            name="documentNumber"
+                            onChange={(e) => handleChange(e)}
                         />
 
 
-                        <label htmlFor="User state">User state</label>
-                        <select name="UserStatusId" onChange={e => handleChange(e)} value={input.UserStatusId}>
-                            <option value="none" >-</option>
-                            <option value="1">Active</option>
-                            <option value="2" >Inactive</option>
-                        </select>
+                        <label htmlFor="User state">User status</label>
+                        
+                        {
+                            userStatus.length !== 0 ?
+                                <select name="UserStatusId" onChange={e => handleChange(e)} value={input.UserStatusId}>
+                                    <option value="none" >-</option>
+                                    { 
+                                    userStatus.map((status)=>{
+                                       return <option value={status.Id}>{status.name}</option>
+                                    })
+                                    }
+                                </select>
+                                :
+                                <div>
+                                    <select name="UserStatusId" onChange={e => handleChange(e)} value={input.UserStatusId}>
+                                        <option value="none" >-</option>
+                                    </select>
+                                    <p>
+                                        Please make sure to enter some user status, in the Add user status section</p>
+                                </div>
+                        }
+
+
 
                         <label htmlFor="Address">Address</label>
-                        <input 
-                        type="text" 
-                        value={input.address}
-                        name="address"
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="text"
+                            value={input.address}
+                            name="address"
+                            onChange={(e) => handleChange(e)}
                         />
 
                         <label htmlFor="City">City</label>
-                        <input 
-                        type="text" 
-                        value={input.city}
-                        name="city"
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="text"
+                            value={input.city}
+                            name="city"
+                            onChange={(e) => handleChange(e)}
                         />
 
                         <label htmlFor="Postal code">Postal code</label>
-                        <input 
-                        type="text" 
-                        value={input.postalCode}
-                        name="postalCode"
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="text"
+                            value={input.postalCode}
+                            name="postalCode"
+                            onChange={(e) => handleChange(e)}
                         />
 
                         <label htmlFor="Phone numbers">Phone numbers</label>
-                        <input 
-                        type="text" 
-                        value={input.phoneNumbers}
-                        name="phoneNumbers"
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="text"
+                            value={input.phoneNumbers}
+                            name="phoneNumbers"
+                            onChange={(e) => handleChange(e)}
                         />
 
                         <label htmlFor="Email">Email</label>
-                        <input 
-                        type="text" 
-                        value={input.email}
-                        name="email"
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="text"
+                            value={input.email}
+                            name="email"
+                            onChange={(e) => handleChange(e)}
                         />
 
                         <label htmlFor="Date of birth">Date of birth</label>
-                        <input 
-                        type="date" 
-                        value={input.dateOfBirth} min="1960-01-01" max="2025-12-31"
-                        name='dateOfBirth'
-                        onChange={(e) => handleChange(e)}
+                        <input
+                            type="date"
+                            value={input.dateOfBirth} min="1960-01-01" max="2025-12-31"
+                            name='dateOfBirth'
+                            onChange={(e) => handleChange(e)}
                         />
 
 

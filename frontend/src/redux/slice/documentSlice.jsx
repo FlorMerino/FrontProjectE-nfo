@@ -20,12 +20,16 @@ export const documentType = createSlice({
         postDocType: (state)=>{
             return{state}     
         },
+        getAllDocuments: (state,action)=>{
+            state.allDocuments = action.payload
+        }
         
     }
 })
 
 export const { 
      postDocType,
+     getAllDocuments
     
 } = documentType.actions
 

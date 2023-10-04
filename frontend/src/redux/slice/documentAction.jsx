@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 import {
-
+    getAllDocuments,
     postDocType,
 
 } from "./documentSlice";
@@ -21,4 +21,17 @@ export const createDocumentType=(document)=>(dispatch)=>{
     })
    
     
+}
+
+export const allDocuments=()=>(dispatch)=>{
+    axios.get("http://localhost:3001/docTypes/allDocuments")
+    .then(resp=> {
+        return{
+            payload:dispatch(getAllDocuments(resp.data))            
+        }})
+    
+    .catch((e) => {
+        console.log(e);
+        // return alert('Something went wrong')
+      });
 }

@@ -5,6 +5,8 @@ import styles from './../home/homeStyles.module.css'
 import { Link } from 'react-router-dom';
 import CardUser from '../cardUser/cardUser';
 import { allUsers } from '../../redux/slice/userAction';
+import { allDocuments } from '../../redux/slice/documentAction';
+import { allStatus } from '../../redux/slice/userStatusAction';
 
 const Home = () => {
 
@@ -14,6 +16,8 @@ const Home = () => {
     console.log(users)
     React.useEffect(()=>{
         dispatch(allUsers())
+        dispatch(allDocuments())
+        dispatch(allStatus())
       },[])
 
 

@@ -28,7 +28,6 @@ const EditUser = () => {
     
      const user = users.find((u)=>{ return u.Id === id})
 
-     console.log(user)
     const [input, setInput] = useState({})
 
     const handleChange = (e) => {
@@ -97,11 +96,25 @@ const EditUser = () => {
                         />
 
                         <label htmlFor="Document type">Document type</label>
-                        <select name="DocumentTypeId" onChange={e => handleChange(e)} defaultValue={user.DocumentTypeId}>
-                            <option value="none" >-</option>
-                            <option value={1}>DNI</option>
-                            <option value={2}>Libreta civica</option>
-                        </select>
+                        {
+                            documents.length !== 0 ?
+                                <select name="DocumentTypeId" onChange={e => handleChange(e)} value={input.DocumentTypeId}>
+                                    <option value="none" >-</option>
+                                    { 
+                                    documents.map((doc)=>{
+                                       return <option value={doc.Id}>{doc.name}</option>
+                                    })
+                                    }
+                                </select>
+                                :
+                                <div>
+                                    <select name="DocumentTypeId" onChange={e => handleChange(e)} value={input.DocumentTypeId}>
+                                        <option value="none" >-</option>
+                                    </select>
+                                    <p>
+                                        Please make sure to enter some type of document, in the Add document type section</p>
+                                </div>
+                        }
 
                         <label htmlFor="Document number">Document number</label>
                         <input 
@@ -112,13 +125,26 @@ const EditUser = () => {
                         />
 
 
-                        <label htmlFor="User state">User state</label>
-                        <select name="UserStatusId" onChange={e => handleChange(e)} defaultValue={user.UserStatusId} >
-                            <option value="none" >-</option>
-                            <option value="1">Active</option>
-                            <option value="2" >Inactive</option>
-                        </select>
-
+                        <label htmlFor="User state">User status</label>
+                        {
+                            userStatus.length !== 0 ?
+                                <select name="UserStatusId" onChange={e => handleChange(e)} value={input.UserStatusId}>
+                                    <option value="none" >-</option>
+                                    { 
+                                    userStatus.map((status)=>{
+                                       return <option value={status.Id}>{status.name}</option>
+                                    })
+                                    }
+                                </select>
+                                :
+                                <div>
+                                    <select name="UserStatusId" onChange={e => handleChange(e)} value={input.UserStatusId}>
+                                        <option value="none" >-</option>
+                                    </select>
+                                    <p>
+                                        Please make sure to enter some user status, in the Add user status section</p>
+                                </div>
+                        }
                         <label htmlFor="Address">Address</label>
                         <input 
                         type="text" 

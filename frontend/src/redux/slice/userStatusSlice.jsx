@@ -20,12 +20,16 @@ export const userStatusSlice = createSlice({
         postUserStatus: (state)=>{
             return{state}     
         },
+        getAllUserStatus: (state,action)=>{
+            state.allUserStatus = action.payload 
+        }
         
     }
 })
 
 export const { 
     postUserStatus,
+    getAllUserStatus
     
 } = userStatusSlice.actions
 
