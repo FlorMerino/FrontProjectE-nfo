@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const documentType = createSlice({
-    name: "documents",
+export const userStatusSlice = createSlice({
+    name: "userStatus",
 
     initialState: {
-        allDocuments:[],
-        // document:[],
+        allUserStatus:[],
+        // userStatus:[],
 
     },
     
     reducers: {
     
-        // getAllDocuments: (state, action)=>{
+        // getAllUserStates: (state, action)=>{
         //     state.allDocuments = action.payload    
         //     state.document = action.payload        
         // },
 
 
-        postDocType: (state)=>{
+        postUserStatus: (state)=>{
             return{state}     
         },
         
@@ -25,8 +25,8 @@ export const documentType = createSlice({
 })
 
 export const { 
-     postDocType,
+    postUserStatus,
     
-} = documentType.actions
+} = userStatusSlice.actions
 
-export default documentType.reducer
+export default userStatusSlice.reducer

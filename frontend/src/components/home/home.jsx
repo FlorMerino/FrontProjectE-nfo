@@ -10,8 +10,8 @@ const Home = () => {
 
     const dispatch = useDispatch();
 
-    const users=useSelector(state=>state.users.users);
-
+    const users = useSelector(state => state.users.allUsers)
+    console.log(users)
     React.useEffect(()=>{
         dispatch(allUsers())
       },[])

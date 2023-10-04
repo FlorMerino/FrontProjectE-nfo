@@ -14,8 +14,7 @@ const AddDocumentType = () => {
 
     const [input, setInput] = useState({
         name: "",
-        description:"",
-        
+        description:"",       
     })
 
     const handleChange=(e)=> {
@@ -36,10 +35,7 @@ const AddDocumentType = () => {
         else {
             e.preventDefault()
             console.log(input)
-            dispatch(createDocumentType({
-                name: input.name,
-                description: input.description,              
-            }))
+            dispatch(createDocumentType(input))
             setInput({
                 name: "",
                 description: "",
@@ -55,7 +51,7 @@ const AddDocumentType = () => {
 
             <div className={styles.head}>
                 <Link to={'/'}><button> <BiArrowBack></BiArrowBack> Back</button></Link>
-                <h1>Add user</h1>
+                <h1>Add document type</h1>
 
             </div>
             <div className={styles.containerForm}>

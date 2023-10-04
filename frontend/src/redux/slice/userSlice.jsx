@@ -29,9 +29,7 @@ export const userSlice = createSlice({
         },
 
         deleteUserById: (state,action)=>{         
-            state.allUsers = action.payload    
-            state.users = action.payload 
-        
+            
           },
         
     }

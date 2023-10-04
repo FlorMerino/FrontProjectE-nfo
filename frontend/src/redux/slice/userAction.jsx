@@ -76,19 +76,5 @@ export const deleteUsers=(id)=>(dispatch)=>{
 
 
 
-///para crear documentos y estados
 
-export const createUserStatus=(status)=>(dispatch)=>{
-    axios.post('http://localhost:3001/usersStatus/postStatus', status)
-    .then(resp=>dispatch(createUser(resp.data)))
-    .then(()=>{
-       return alert('User status created successfully')
-    })
-    .catch((e) => {
-        console.log(e)
-        return alert('Something went wrong')
-    })
-   
-    
-}
 
